@@ -15,7 +15,7 @@ const userRoute = require("./routes/user");
 
 app.use("/user",userRoute);
 
-const Port=process.env.port || 5000;
+const Port=process.env.PORT || 5000;
 
 app.route("/").get((req,res)=>res.json("My first REST API"));
 
