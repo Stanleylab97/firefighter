@@ -17,6 +17,6 @@ app.use("/user",userRoute);
 
 const Port=process.env.PORT || 5000;
 
-app.route("/").get((req,res)=>res.json("My first REST API"));
+app.route("/").get((req,res)=>res.json("Welcome to the web service of Firefighters"));
 
 app.listen(Port,()=>console.log(`Your server is running on port ${Port}`));
