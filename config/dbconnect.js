@@ -1,8 +1,8 @@
 module.exports = {
-    HOST: "donaconsult.com",
+    HOST: "sabrosso.online",
     PORT: "3306",
-    USER: "stanley",
-    PASSWORD: "stanley97",
+    USER: "LordCao",
+    PASSWORD: "Atlantique1",
     DB: "firefighter",
     dialect: "mysql",
 
