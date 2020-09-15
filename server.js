@@ -11,6 +11,7 @@ app.use(express.json());
 
 const userRoute = require("./routes/user");
 const sinistreRoute = require("./routes/sinistre");
+
 //Only on dev mode||Remove existing files from uploads dir
 var env = process.argv[2] || 'dev';
 switch (env) {
