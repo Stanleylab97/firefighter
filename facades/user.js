@@ -22,7 +22,8 @@ exports.create = (req, res) => {
     const user = {
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        tel: req.body.tel,
+        password: req.body.password      
     };
 
     // Save User in the database
@@ -63,26 +64,19 @@ exports.login = (req, res) => {
          });
 };
 
-// Retrieve all Users from the database.
-exports.findAll = (req, res) => {
-
-};
-
-
-
 // Find a single User with an id
 exports.getUser = (req, res) => {
 
-    User.findAll({ where: { email: req.body.email } }
+    User.findOne({ where: { email: req.body.email } }
     )
-        .then(data => {
+     .then(data => {
             res.status(200).json({
-                data: data
+                user: data
             })
-        })
-        .catch((e) => {
+     })
+    .catch((e) => {
             res.status(500).json({ msg: e });
-        });
+    });
 
 };
 
@@ -93,7 +87,7 @@ exports.patch = async (req, res) => {
         const userCollection = await User.findAll({
             where: { username: req.params.username }
         });
-        console.log('check');
+        
         if (userCollection) {
             const updatedUser = await User.update({ password: req.body.password },
                 { where: { username: req.params.username } });

@@ -1,7 +1,6 @@
-const users = require("../facades/user.js");
 const router = require("express").Router();
 const middleware = require("../config/middleware");
-
+const users = require("../facades/user.js");
 
  // Create a new User
     router.route("/register").post(users.create);

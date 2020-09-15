@@ -3,7 +3,7 @@ const express=require("express");
 const app = express();
 
 var db = require("./models");
-db.sequelize.sync({}).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.\nThe database is ready!");
 });
 
@@ -12,8 +12,10 @@ db.sequelize.sync({}).then(() => {
 app.use(express.json());
 
 const userRoute = require("./routes/user");
+const sinistreRoute = require("./routes/sinistre");
 
-app.use("/user",userRoute);
+app.use("/users",userRoute);
+app.use("/sinistres", sinistreRoute);
 
 const Port=process.env.PORT || 5000;
 

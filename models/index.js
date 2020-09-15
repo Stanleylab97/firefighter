@@ -1,5 +1,4 @@
-const dbConfig = require("../dbconnect.js");
-
+const dbConfig = require("../config/dbconnect.js");
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
@@ -18,6 +17,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.users = require("./users.js")(sequelize, Sequelize);
-
+db.users = require("./user")(sequelize, Sequelize);
+db.sinistre = require("./sinistre")(sequelize, Sequelize);
+db.sinistre.belongsTo(db.users);
 module.exports = db;
