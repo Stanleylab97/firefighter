@@ -4,6 +4,7 @@ module.exports = {
     USER: "stanley",
     PASSWORD: "stanley97",
     DB: "firefighter",
+    
     dialect: "mysql",
 
 
