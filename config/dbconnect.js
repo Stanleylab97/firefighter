@@ -1,5 +1,5 @@
 module.exports = {
-    HOST: "sabrosso.online",
+    HOST: "caredev.sabrosso.online",
     PORT: "3306",
     USER: "LordCao",
     PASSWORD: "Atlantique1",
