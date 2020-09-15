@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "./uploads");
     }, filename: (req, file, cb) => {
-        cb(null, req.decoded.username + ".jpg");
+        cb(null, req.decoded.username + Date.now()+".jpg");
     }
 });
 
@@ -31,13 +31,13 @@ const upload = multer({
 
 
 // Create a new sinistre
-router.route("/create").patch(middleware.checkToken, upload.single("img"), sinistres.uploadImage);
+router.route("/create").patch(middleware.checkToken, upload.single("image"), sinistres.uploadImage);
 
 // Get  single sinistre
 router.route("/:id").get(middleware.checkToken,sinistres.findOne);
 
 //Get all sinistres
-router.route("/").patch(middleware.checkToken, sinistres.getList);
+router.route("/").get(middleware.checkToken, sinistres.getList);
 
 
 

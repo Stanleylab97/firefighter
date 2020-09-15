@@ -1,4 +1,5 @@
 const db = require("../models");
+const config = require("../config/config");
 const Sinistre = db.sinistre;
 const Op = db.Sequelize.Op;
 
@@ -7,7 +8,8 @@ exports.uploadImage = async (req, res) => {
         typeSin: req.body.typeSin,
         lon: req.body.lon,
         lat: req.body.lat,
-        image: req.file.path,
+        image: config.baseUrl+""+req.file.path,
+        UserId: req.decoded.id
     };
 
     await Sinistre.create(sinistre)
@@ -23,7 +25,15 @@ exports.uploadImage = async (req, res) => {
 
 
 exports.getList = (req, res) => {
-    Sinistre.findAll({});
+    Sinistre.findAll({})
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while getting list"
+            });
+        });
 }
 
 exports.findOne=(req,res)=>{

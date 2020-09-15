@@ -49,7 +49,7 @@ exports.login = (req, res) => {
             }
             if (user.password === req.body.password) {
 
-                let token=jwt.sign({username:req.body.email},config.key,{expiresIn:"1h"});
+                let token=jwt.sign({username:user.username,id:user.id},config.key,{expiresIn:"1h"});
                 res.status(200).json({
                     token: token,
                     msg: "success" 
@@ -87,7 +87,7 @@ exports.patch = async (req, res) => {
         const userCollection = await User.findAll({
             where: { username: req.params.username }
         });
-        
+
         if (userCollection) {
             const updatedUser = await User.update({ password: req.body.password },
                 { where: { username: req.params.username } });
