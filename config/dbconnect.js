@@ -1,8 +1,8 @@
 module.exports = {
-    HOST: "sabrosso.online",
+    HOST: "156.0.213.22",
     PORT: "3306",
-    USER: "LordCao",
-    PASSWORD: "Atlantique1",
+    USER: "root",
+    PASSWORD: "stan",
     DB: "firefighter",
     dialect: "mysql",
 
