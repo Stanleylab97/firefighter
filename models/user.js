@@ -1,15 +1,49 @@
+const bcrypt = require('bcryptjs');
+
 module.exports = (sequelize, Sequelize) => {
 
  
     const User = sequelize.define('User', {
-        username: { type: Sequelize.STRING, unique: true, allowNull: false },
+        method: { type: Sequelize.STRING,  allowNull: false },
         email: { type: Sequelize.STRING, allowNull: false, unique: true, validate: { isEmail: true } },
-        tel: { type: Sequelize.INTEGER, allowNull: false },
-        password: { type: Sequelize.STRING, allowNull: false },
+        google_id: { type: Sequelize.STRING, allowNull: true },
+        tel: { type: Sequelize.INTEGER, allowNull: true },
+        password: { type: Sequelize.STRING, allowNull: true },
+       
+    }, { timestamps: false },
+    {
+        instanceMethods: {
+            comparePassword: function (candidatePassword, cb) {
+                bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+                    if (err) return cb(err);
+                    cb(null, isMatch);
+                });
+            }
+        }
+    });
 
-    }, { timestamps: false });
-
-  
-
+    User.beforeCreate(async (user, options) => {
+        try {
+           
+            if (!this.method === 'local') {
+               return ;
+            }
+            //the user schema is instantiated
+            
+            
+            // Generate a salt
+            const salt = await bcrypt.genSalt(10);
+            // Generate a password hash (salt + hash)
+            const passwordHash = await bcrypt.hash(user.dataValues.password, salt);
+            console.log(passwordHash);
+            // Re-assign hashed version over original, plain text password
+            user.password = passwordHash;
+            console.log('Password encrypted');
+           
+        } catch (error) {
+           console.log(error)
+        }
+    });
+    
     return User;
 };   
