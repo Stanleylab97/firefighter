@@ -3,13 +3,20 @@ Partie Web service
 
 1-Clone le projet sur Github et l'ouvrir   dans le terminal  code .
 
-2-Ouvrir le fichier config/dbconnect.js et changer les access
+2-Créer la base de données firefight dans phpmyAdmin
 
-3-lancer la commande npm install 
+3-Ouvrir le fichier config/dbconnect.js et changer les access
 
-4-ce qui te concerne est dans le dossier routes/sinistre.js
+4-lancer la commande npm install 
+
+5-ce qui te concerne est dans le dossier routes/sinistre.js
+
+
 
 Pour lancer le serveur en dev fais un npm start dans le terminal à la racine du projet
+
+
+
 
 Tu définis un port vu que ton 5000 est pour python-> server.js
 Tu créé une page de connexion ou de création de compte.
