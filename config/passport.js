@@ -6,7 +6,6 @@ const GooglePlusTokenStrategy = require('passport-google-plus-token');
 const bcrypt = require('bcryptjs');
 const config = require('./config');
 const db = require('../models');
-
 const User = db.users;
 
 const cookieExtractor = req => {
@@ -25,7 +24,7 @@ passport.use(new JwtStrategy({
 }, async (req, payload, done) => {
     try {
         // Find the user specified in token
-        const user = await req.user.findById(payload.sub);
+        const user = await User.findById(payload.sub);
 
         // If user doesn't exists, handle it
         if (!user) {

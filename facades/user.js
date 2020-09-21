@@ -35,19 +35,16 @@ module.exports = {
             };
             await User.create(newUser)
                 .then(data => {
-                   
                     // Generate the token
                     const token = signToken(newUser);
                     console.log(token);
                     // Respond with token
-                    res.cookie('access_token', token, {
-                        httpOnly: true
-                    });
+                    
                     res.status(200).json({
                         msg: "Utilisateur créé via login-password",
-                        success: true
+                        token: token
                     });
-                    res.send(data);
+                    
                 })
                 .catch(err => {
                     res.status(500).send({
@@ -66,10 +63,10 @@ module.exports = {
             email:req.body.email,
             password: req.body.password};
         const token = signToken(user);
-        res.cookie('access_token', token, {
+        res.cookie('token', token, {
             httpOnly: true
         });
-        res.status(200).json({ success: true });
+        res.status(200).json({ 'token': token});
     },
 
     signOut: async (req, res, next) => {
@@ -80,11 +77,9 @@ module.exports = {
 
     googleOAuth: async (req, res, next) => {
         // Generate token
+        console.log('req.user:',req.user);
         const token = signToken(req.user);
-        res.cookie('access_token', token, {
-            httpOnly: true
-        });
-        res.status(200).json({ success: true });
+        res.status(200).json({'token': token});
     },
 
     linkGoogle: async (req, res, next) => {
@@ -117,7 +112,7 @@ module.exports = {
 
   
     dashboard: async (req, res, next) => {
-        console.log('I managed to get here!');
+       
         res.json({
             secret: "resource",
             methods: req.method
