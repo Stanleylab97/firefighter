@@ -39,7 +39,7 @@ const userRoute = require("./routes/user");
 const sinistreRoute = require("./routes/sinistre");
 
 app.use("/users",userRoute);
-app.use("/sinistres", sinistreRoute);
+app.use("/sinisters", sinistreRoute);
 app.use("/uploads/",express.static("uploads"));
 
 app.use(cookieParser());
