@@ -17,5 +17,5 @@ L'utilisateur doit être connecté pour accéder aux ressources.
 
 
 Tu connectes un utilisateur à la base pour obtenir un token que tu utiliseras dans la route /sinstres/
-  GET localhost:port/sinsters/    pour récupérer tous les sinistres(alertes)
+  GET localhost:port/sinsters/  pour récupérer tous les sinistres(alertes)
   GET localhost:port/sinsters/:id    pour récupérer les détails d'un sinistre avec son id
