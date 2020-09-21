@@ -8,7 +8,6 @@ const passportJWT = passport.authenticate('jwt', { session: false });
 const router = require('express-promise-router')();
 const { validateBody, schemas } = require('../routes/routeHelpers');
 
-
 router.route('/register').post(users.signUp);
 
 router.route('/login').post(passportSignIn, users.signIn);
