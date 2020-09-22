@@ -37,7 +37,7 @@ module.exports = {
                 .then(data => {
                     // Generate the token
                     const token = signToken(newUser);
-                    console.log(token);
+                    
                     // Respond with token
                     
                     res.status(200).json({
@@ -63,9 +63,9 @@ module.exports = {
             email:req.body.email,
             password: req.body.password};
         const token = signToken(user);
-        res.cookie('token', token, {
+        /* res.cookie('token', token, {
             httpOnly: true
-        });
+        }); */
         res.status(200).json({ 'token': token});
     },
 

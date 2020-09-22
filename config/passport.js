@@ -103,21 +103,18 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
 
 // LOCAL STRATEGY
 passport.use(new LocalStrategy({
-    usernameField: 'email'
+    emailField: 'email'
 }, async (email, password, done) => {
     try {
         // Find the user given the email
-        const user = await User.findOne({ "email": email });
+        const user = await User.findOne({where:{ "email": email }});
 
         // If not, handle it
-        if (!user) {
-            return done(null, false);
-        }
+        if (!user)return done(null, false);
 
         // Check if the password is correct
         const isMatch = await bcrypt.compare(password, user.password);
         
-
         // If not, handle it
         if (!isMatch) {
             return done(null, false);

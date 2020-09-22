@@ -29,17 +29,13 @@ module.exports = (sequelize, Sequelize) => {
                return ;
             }
             //the user schema is instantiated
-            
-            
+
             // Generate a salt
             const salt = await bcrypt.genSalt(10);
             // Generate a password hash (salt + hash)
             const passwordHash = await bcrypt.hash(user.dataValues.password, salt);
-            console.log(passwordHash);
             // Re-assign hashed version over original, plain text password
             user.password = passwordHash;
-            console.log('Password encrypted');
-           
         } catch (error) {
            console.log(error)
         }

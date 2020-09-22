@@ -1,15 +1,19 @@
 const db = require("../models");
+const decodeToken=require("../config/middleware");
+const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 const Sinistre = db.sinistre;
 const Op = db.Sequelize.Op;
 
 exports.uploadImage = async (req, res) => {
+     const baseUrl= "http://localhost:5000/"
+
     const sinistre = {
         typeSin: req.body.typeSin,
         lon: req.body.lon,
         lat: req.body.lat,
-        image: config.baseUrl+""+req.file.path,
-        UserId: req.decoded.id
+        image: baseUrl+""+req.file.path,
+        UserId: 1
     };
 
     await Sinistre.create(sinistre)
@@ -48,6 +52,9 @@ exports.findOne=(req,res)=>{
             res.status(500).json({ msg: e });
         });
 }
+
+
+
 
 
 
