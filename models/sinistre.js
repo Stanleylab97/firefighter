@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
         lat: { type: Sequelize.DOUBLE, allowNull: false },
         imageUrl: { type: Sequelize.STRING, allowNull: false },
         dateSin: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
-        consulted: { type: Sequelize.BOOLEAN, allowNull: false },
+        consulted: { type: Sequelize.BOOLEAN, defaultValue: false },
 
     }, { timestamps: false }, { underscored: true });
 

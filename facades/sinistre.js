@@ -7,7 +7,7 @@ const Op = db.Sequelize.Op;
 
 exports.uploadImage = async (req, res) => {
      const baseUrl= "http://localhost:5000/"
-     console.log(parseFloat(req.body.lon));
+
     const sinistre = {
         typeSin: req.body.typeSin,
         lon: parseFloat(req.body.lon),
@@ -19,7 +19,7 @@ exports.uploadImage = async (req, res) => {
 
     await Sinistre.create(sinistre)
         .then(data => {
-            res.send(data);
+            res.status(201).send(data);
         })
         .catch(err => {
             res.status(500).send({
