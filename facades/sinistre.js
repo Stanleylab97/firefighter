@@ -7,12 +7,13 @@ const Op = db.Sequelize.Op;
 
 exports.uploadImage = async (req, res) => {
      const baseUrl= "http://localhost:5000/"
-
+     console.log(parseFloat(req.body.lon));
     const sinistre = {
         typeSin: req.body.typeSin,
-        lon: req.body.lon,
-        lat: req.body.lat,
-        image: baseUrl+""+req.file.path,
+        lon: parseFloat(req.body.lon),
+        lat: parseFloat(req.body.lat),
+        imageUrl: baseUrl+""+req.file.path,
+        consulted: false,
         UserId: 1
     };
 

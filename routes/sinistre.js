@@ -34,7 +34,7 @@ const upload = multer({
 
 
 // Create a new sinistre
-router.route("/create").patch(upload.single("image"), sinistres.uploadImage);
+router.route("/create").post(upload.single("imageUrl"), sinistres.uploadImage);
 
 // Get  single sinistre
 router.route("/:id").get(sinistres.findOne);

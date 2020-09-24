@@ -82,7 +82,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
                     google_id: profile.id,
                     email: profile.emails[0].value
                 }
-                await existingUser.save()
+                await User.create(existingUser);
                 return done(null, existingUser);
             }
 
