@@ -6,7 +6,6 @@ module.exports = {
     DB: "firefighter",
     dialect: "mysql",
 
-
    /*  HOST: "213.186.33.176",
     PORT: "3306",
     USER: "gabassurijfire",
