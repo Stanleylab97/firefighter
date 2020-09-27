@@ -15,36 +15,36 @@ signToken = user => {
 module.exports = {
     signUp: async (req, res, next) => {
         const method = req.body.method;
-        const email=req.body.email;
-        const tel=req.body.tel;
-        const password=req.body.password;
+        const email = req.body.email;
+        const tel = req.body.tel;
+        const password = req.body.password;
         // Check if there is a user with the same email
-        let foundUser = await User.findOne({ where: {"email": email}});
+        let foundUser = await User.findOne({ where: { "email": email } });
         if (foundUser) {
             return res.status(403).json({ error: 'Email is already in use' });
         }
 
-        if (!foundUser && method ==="local") {
+        if (!foundUser && method === "local") {
             // Let's merge them?
-            
-           const newUser = {
+
+            const newUser = {
                 method: method,
                 email: email,
-                tel:tel,
+                tel: tel,
                 password: password
             };
             await User.create(newUser)
                 .then(data => {
                     // Generate the token
                     const token = signToken(newUser);
-                    
+
                     // Respond with token
-                    
+
                     res.status(200).json({
                         msg: "Utilisateur créé via login-password",
                         token: token
                     });
-                    
+
                 })
                 .catch(err => {
                     res.status(500).send({
@@ -52,21 +52,23 @@ module.exports = {
                             err.message || "Some error occurred while creating the User."
                     });
                 });
-            
+
         }
 
     },
 
     signIn: async (req, res, next) => {
         // Generate token
-        const user={
-            email:req.body.email,
-            password: req.body.password};
+        const user = {
+            email: req.body.email,
+            password: req.body.password
+        };
+
         const token = signToken(user);
         /* res.cookie('token', token, {
             httpOnly: true
         }); */
-        res.status(200).json({ 'token': token});
+        res.status(200).json({ 'token': token });
     },
 
     signOut: async (req, res, next) => {
@@ -77,9 +79,12 @@ module.exports = {
 
     googleOAuth: async (req, res, next) => {
         // Generate token
-        console.log('req.user:',req.user);
+        console.log('req.user:', req.user);
         const token = signToken(req.user);
-        res.status(200).json({'token': token});
+        res.status(200).json({
+            "msg": "User logged In via Google OAuth",
+            'token': token
+        });
     },
 
     linkGoogle: async (req, res, next) => {
@@ -110,9 +115,9 @@ module.exports = {
         });
     },
 
-  
+
     dashboard: async (req, res, next) => {
-       
+
         res.json({
             secret: "resource",
             methods: req.method
@@ -122,8 +127,37 @@ module.exports = {
     checkAuth: async (req, res, next) => {
         console.log('I managed to get here!');
         res.json({ success: true });
-    }
+    },
+
+
+    checkUserExist: (req, res) => {
+
+        User.findOne({ where: { email: req.params.email } }
+        )
+            .then(data => {
+                if (data != null) {
+                    return res.json({
+                        statut: true
+                    });
+                } else {
+                    return res.json({
+                        statut: false
+                    });
+                }
+
+
+            })
+            .catch((e) => {
+                res.status(500).json({ msg: e });
+            });
+
+    },
+
 }
+
+
+//Find a single User with an id
+
 
 /* const db = require("../models");
 const User = db.users;
@@ -150,7 +184,7 @@ exports.create = (req, res) => {
         username: req.body.username,
         email: req.body.email,
         tel: req.body.tel,
-        password: req.body.password      
+        password: req.body.password
     };
 
     // Save User in the database
@@ -166,7 +200,7 @@ exports.create = (req, res) => {
         });
 };
 
-// Login a  User 
+// Login a  User
 exports.login = (req, res) => {
 
     User.findOne({ where: { email: req.body.email } })
@@ -179,34 +213,20 @@ exports.login = (req, res) => {
                 let token=jwt.sign({username:user.username,id:user.id},config.key,{expiresIn:"1h"});
                 res.status(200).json({
                     token: token,
-                    msg: "success" 
+                    msg: "success"
                 });
             } else {
                 console.log(user);
                 res.status(403).json("Mot de passe incorrect");
-            } 
+            }
         })
          .catch((e) => {
              res.status(500).json({ msg: e });
          });
 };
+*/
 
-// Find a single User with an id
-exports.getUser = (req, res) => {
-
-    User.findOne({ where: { email: req.body.email } }
-    )
-     .then(data => {
-            res.status(200).json({
-                user: data
-            })
-     })
-    .catch((e) => {
-            res.status(500).json({ msg: e });
-    });
-
-};
-
+/*
 // Update a User by the id in the request
 exports.patch = async (req, res) => {
     console.log('inside update');

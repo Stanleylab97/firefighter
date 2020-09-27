@@ -7,7 +7,7 @@ const router = require('express-promise-router')();
 
 router.route('/register').post(users.signUp);
 
-router.route('/login').post(users.signIn);
+router.route('/login').post(passportSignIn, users.signIn);
 
 router.route('/signout').get(passportJWT, users.signOut);
 
@@ -21,6 +21,7 @@ router.route('/dashboard').get(passportJWT, users.dashboard);
 
 router.route('/status').get(passportJWT, users.checkAuth);
 
+router.route('/checkmail/:email').get(users.checkUserExist);
 
 
 module.exports = router;

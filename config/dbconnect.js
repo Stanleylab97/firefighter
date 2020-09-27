@@ -1,27 +1,16 @@
 module.exports = {
-    HOST: "donaconsult.com",
+    HOST: "localhost",
     PORT: "3306",
-    USER: "stanley",
-    PASSWORD: "stanley97",
+    USER: "root",
+    PASSWORD: "stan",
     DB: "firefighter",
     dialect: "mysql",
-
-    
-   /*  HOST: "213.186.33.176",
-    PORT: "3306",
-    USER: "gabassurijfire",
-    PASSWORD: "Atlantique1",
-    DB: "gabassurijfire",
-    dialect: "mysql", */
-
-    // HOST: "lelordstan.raidghost.com",
-    // PORT: "3306",
-    // USER: "lordstan",
-    // PASSWORD: "lordstan",
-    // DB: "firefighter",
-    // dialect: "mysql",
-
-
+    dialectOptions: {
+        useUTC: false, //for reading from database
+        dateStrings: true,
+        typeCast: true
+    },
+    timezone: '+01:00', //for writing to database
     pool: {
         max: 100,
         min: 0,

@@ -70,11 +70,12 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
             // We're in the account creation process
             let existingUser = await User.findOne({ "google_id": profile.id });
             if (existingUser) {
+                console.log("User already exist in our database");
                 return done(null, existingUser);
             }
 
             // Check if we have someone with the same email
-            existingUser = await User.findOne({ "email": profile.emails[0].value })
+            existingUser = await User.findOne({ "email": profile.emails[0].value });
             if (existingUser) {
                 // We want to merge google's data with local auth
                 existingUser= {
@@ -82,18 +83,17 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
                     google_id: profile.id,
                     email: profile.emails[0].value
                 }
+                console.log("We are going to create the new user"); 
                 await User.create(existingUser);
                 return done(null, existingUser);
             }
 
-            const newUser = new User({
+            const newUser = {
                     method : "google",
                     google_id: profile.id,
                     email: profile.emails[0].value
                 }
-            );
-
-            await newUser.save();
+            await User.create(newUser);
             done(null, newUser);
         }
     } catch (error) {

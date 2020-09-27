@@ -1,7 +1,7 @@
 const db = require("../models");
-const decodeToken=require("../config/middleware");
-const jwt = require("jsonwebtoken");
-const config = require("../config/config");
+//const decodeToken=require("../config/middleware");
+//const jwt = require("jsonwebtoken");
+//const config = require("../config/config");
 const Sinistre = db.sinistre;
 const Op = db.Sequelize.Op;
 
@@ -13,8 +13,7 @@ exports.uploadImage = async (req, res) => {
         lon: parseFloat(req.body.lon),
         lat: parseFloat(req.body.lat),
         imageUrl: baseUrl+""+req.file.path,
-        consulted: false,
-        UserId: 1
+        UserId: req.email
     };
 
     await Sinistre.create(sinistre)
@@ -41,28 +40,29 @@ exports.getList = (req, res) => {
         });
 }
 
+exports.getUnread = (req, res) => {
+    Sinistre.findAll({ where: {consulted:false },
+        order: [['dateSin', 'DESC']],
+    })
+        .then(data => {
+            res.status(200).json({"data":data});
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while getting list"
+            });
+        });
+}
+
 exports.findOne=(req,res)=>{
     Sinistre.findOne({ where: { id: req.params.id } }
     )
         .then(data => {
             res.status(200).json({
-                user: data
+                alert: data
             })
         })
         .catch((e) => {
             res.status(500).json({ msg: e });
         });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

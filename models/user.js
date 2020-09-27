@@ -24,18 +24,21 @@ module.exports = (sequelize, Sequelize) => {
 
     User.beforeCreate(async (user, options) => {
         try {
-           
-            if (!this.method === 'local') {
-               return ;
+                    
+            if (user.method === 'local') {
+                //the user schema is instantiated
+                // Generate a salt
+                const salt = await bcrypt.genSalt(10);
+                // Generate a password hash (salt + hash)
+                const passwordHash = await bcrypt.hash(user.dataValues.password, salt);
+                // Re-assign hashed version over original, plain text password
+                user.password = passwordHash;
+            } else if (user.method === 'google'){
+                user.method="google"
+            }else{
+                return ;
             }
-            //the user schema is instantiated
-
-            // Generate a salt
-            const salt = await bcrypt.genSalt(10);
-            // Generate a password hash (salt + hash)
-            const passwordHash = await bcrypt.hash(user.dataValues.password, salt);
-            // Re-assign hashed version over original, plain text password
-            user.password = passwordHash;
+           
         } catch (error) {
            console.log(error)
         }
