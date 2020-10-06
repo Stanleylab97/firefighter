@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         console.log("directoy name: in sinistre " + __dirname);
         !fs.existsSync("/app/uploads") && fs.mkdirSync("/app/uploads");
-        cb(null, "../uploads");
+        cb(null, "/app/uploads");
     }, filename: (req, file, cb) => {
         cb(null, "IMG" + Date.now() + ".jpg");
     }
