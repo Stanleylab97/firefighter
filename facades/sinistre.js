@@ -6,7 +6,7 @@ const Sinistre = db.sinistre;
 const Op = db.Sequelize.Op;
 
 exports.uploadImage = async (req, res) => {
-     const baseUrl= "http://localhost:5000/"
+    const baseUrl = "https://stark-garden-07837.herokuapp.com/"
 
     const sinistre = {
         typeSin: req.body.typeSin,
