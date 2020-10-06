@@ -30,7 +30,6 @@ switch (env) {
     case 'prod':
         db.sequelize.sync().then(() => {
             console.log("The database is ready!");
-            console.log("Directory name: "+__dirname);
         });
         break;
 }

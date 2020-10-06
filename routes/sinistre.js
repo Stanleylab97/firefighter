@@ -16,7 +16,7 @@ const passportJWT = passport.authenticate('jwt', { session: false });
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         console.log("directoy name: in sinistre " + __dirname);
-        cb(null, "/app/uploads/");
+        cb(null, "/app/uploads");
     }, filename: (req, file, cb) => {
         cb(null, "IMG" + Date.now() + ".jpg");
     }
