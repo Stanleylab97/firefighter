@@ -7,7 +7,7 @@ const router = require('express-promise-router')();
 
 router.route('/register').post(users.signUp);
 
-router.route('/login').post(passportSignIn, users.signIn);
+router.route('/login').post(users.signIn);
 
 router.route('/signout').get(passportJWT, users.signOut);
 

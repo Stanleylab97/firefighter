@@ -1,9 +1,9 @@
 module.exports = {
-    HOST: "localhost",
+    HOST: "us-cdbr-east-02.cleardb.com",
     PORT: "3306",
-    USER: "root",
-    PASSWORD: "stan",
-    DB: "firefighter",
+    USER: "b508196e624064",
+    PASSWORD: "63b63504",
+    DB: "heroku_c20885353691853",
     dialect: "mysql",
     dialectOptions: {
         useUTC: false, //for reading from database
