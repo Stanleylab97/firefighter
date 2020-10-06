@@ -4,6 +4,7 @@ const passport = require('passport');
 const passportConf = require('../config/passport');
 const sinistres = require("../facades/sinistre.js");
 const multer = require("multer");
+const fs = require('fs');
 
 const passportJWT = passport.authenticate('jwt', { session: false });
 
@@ -16,6 +17,7 @@ const passportJWT = passport.authenticate('jwt', { session: false });
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         console.log("directoy name: in sinistre " + __dirname);
+        !fs.existsSync("/app/uploads") && fs.mkdirSync("/app/uploads");
         cb(null, "/app/uploads");
     }, filename: (req, file, cb) => {
         cb(null, "IMG" + Date.now() + ".jpg");
