@@ -27,3 +27,4 @@ db.rapport.belongsTo(db.caserne);
 db.rapport.belongsTo(db.sinistre);
 
 module.exports = db;
+console.log("directoy name in models: " + __dirname);
