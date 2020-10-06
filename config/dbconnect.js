@@ -4,6 +4,11 @@ module.exports = {
     USER: "b508196e624064",
     PASSWORD: "63b63504",
     DB: "heroku_c20885353691853",
+/*     HOST: "localhost",
+    PORT: "3306",
+    USER: "root",
+    PASSWORD: "stan",
+    DB: "firefighter", */
     dialect: "mysql",
     dialectOptions: {
         useUTC: false, //for reading from database
