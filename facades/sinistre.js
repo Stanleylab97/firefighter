@@ -7,12 +7,12 @@ const Op = db.Sequelize.Op;
 
 exports.uploadImage = async (req, res) => {
     const baseUrl = "https://stark-garden-07837.herokuapp.com"  //local server => 127.0.0.1:5000
-
+    const url = `${req.file.path}`;
     const sinistre = {
         typeSin: req.body.typeSin,
         lon: parseFloat(req.body.lon),
         lat: parseFloat(req.body.lat),
-        imageUrl: baseUrl + "" + baseUrl + "" + req.file.path.slice(4, url.length),   //local server =>  req.file.path,
+        imageUrl: baseUrl + "" + baseUrl + "" + url.slice(4, url.length),   //local server =>  req.file.path,
         UserId: req.email
     };
 
