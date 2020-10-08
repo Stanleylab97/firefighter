@@ -12,7 +12,7 @@ exports.uploadImage = async (req, res) => {
         typeSin: req.body.typeSin,
         lon: parseFloat(req.body.lon),
         lat: parseFloat(req.body.lat),
-        imageUrl: baseUrl + "" + baseUrl + "" + url.slice(4, url.length),   //local server =>  req.file.path,
+        imageUrl: baseUrl + "" + url.slice(4, url.length),   //local server =>  req.file.path,
         UserId: req.email
     };
 
